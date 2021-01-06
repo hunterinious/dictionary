@@ -38,6 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',
+    'personal_dictionaries',
+    'categories',
+    'themes',
+    'languages',
+    'words',
+    'phrases',
+    'conjugation_links'
 ]
 
 MIDDLEWARE = [
@@ -67,6 +75,8 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTH_USER_MODEL = 'users.CustomUser'
 
 WSGI_APPLICATION = 'dictionary.wsgi.application'
 
