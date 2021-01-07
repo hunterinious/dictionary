@@ -16,8 +16,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=50, unique=True)),
-                ('code', models.CharField(max_length=10, unique=True)),
-                ('national_flag', models.ImageField(blank=True, null=True, upload_to='national_flags')),
             ],
         ),
     ]
