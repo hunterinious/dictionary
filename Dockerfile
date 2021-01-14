@@ -9,12 +9,12 @@ RUN apk add --no-cache \
         jpeg-dev \
         zlib-dev
 
-WORKDIR /psy_time
+WORKDIR /dictionary
 
-COPY requirements.txt /psy_time/
+COPY requirements.txt /dictionary/
 
 ENV PYTHONUNBUFFERED=1 \
-    DJANGO_SETTINGS_MODULE=psy_time.prod \
+    DJANGO_SETTINGS_MODULE=dictionary.prod \
     PORT=8000 \
     WEB_CONCURRENCY=3
 
@@ -25,8 +25,8 @@ RUN apk update && \
     python3 -m pip install -r requirements.txt --no-cache-dir && \
     apk del --no-cache .build-deps
 
-COPY . /psy_time
+COPY . /dictionary
 
 RUN python3 manage.py collectstatic --noinput --clear
 
-CMD gunicorn psy_time.wsgi:application --bind 0.0.0.0:$PORT
+CMD gunicorn dictionary.wsgi:application --bind 0.0.0.0:$PORT

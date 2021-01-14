@@ -39,13 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
-    'personal_dictionaries',
-    'categories',
+    'dictionaries',
     'themes',
     'languages',
     'words',
     'phrases',
-    'conjugation_links'
 ]
 
 MIDDLEWARE = [
