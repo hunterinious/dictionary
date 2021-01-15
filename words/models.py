@@ -20,7 +20,7 @@ class PartOfSpeech(models.TextChoices):
 
 class Word(models.Model):
     dictionary = models.ForeignKey(Dictionary, related_name='words', on_delete=models.CASCADE)
-    theme = models.ManyToManyField(Theme, related_name='words')
+    themes = models.ManyToManyField(Theme, related_name='words')
     extra = models.JSONField(null=True)
 
 
@@ -30,8 +30,3 @@ class WordTranslation(models.Model):
     language = models.ForeignKey(Language, related_name='word_translations', on_delete=models.CASCADE)
     extra = models.JSONField(null=False)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['word', 'language'],
-                                    name='word and language must be unique within the dictionary')
-        ]

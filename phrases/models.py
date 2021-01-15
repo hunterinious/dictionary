@@ -6,7 +6,7 @@ from languages.models import Language
 
 class Phrase(models.Model):
     dictionary = models.ForeignKey(Dictionary, related_name='phrases', on_delete=models.CASCADE)
-    theme = models.ManyToManyField(Theme, related_name='phrases')
+    themes = models.ManyToManyField(Theme, related_name='phrases')
     extra = models.JSONField(null=True)
 
 
@@ -14,9 +14,3 @@ class PhraseTranslation(models.Model):
     phrase = models.ForeignKey(Phrase, related_name='phrase_translations', on_delete=models.CASCADE)
     language = models.ForeignKey(Language, related_name='phrase_translations', on_delete=models.CASCADE)
     extra = models.JSONField(null=False)
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['phrase', 'language'],
-                                    name='phrase and language must be unique within the dictionary')
-        ]
