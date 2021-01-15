@@ -3,20 +3,26 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager, Permission
 
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, password):
+    def __create_base_user(self, email, password):
         user = self.model(
             email=self.normalize_email(email),
         )
 
         user.set_password(password)
         user.save(using=self._db)
+
+        return user
+
+    def create_user(self, email, password, name):
+        user = self.__create_base_user(email, password)
+
+        user_profile = UserProfile.objects.create(name=name, user=user)
+        user_profile.save()
+
         return user
 
     def create_superuser(self, email, password):
-        user = self.create_user(
-            email=email,
-            password=password
-        )
+        user = self.__create_base_user(email, password)
 
         user.is_superuser = True
         user.is_staff = True
